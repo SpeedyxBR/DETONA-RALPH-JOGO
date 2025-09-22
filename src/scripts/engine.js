@@ -21,6 +21,11 @@ class DetonaRalphGame {
         gameOverModal: document.querySelector("#game-over-modal"),
         finalScoreValue: document.querySelector("#final-score-value"),
         playAgainBtn: document.querySelector("#play-again-btn"),
+        viewRankingBtn: document.querySelector("#view-ranking-btn"),
+        rankingModal: document.querySelector("#ranking-modal"),
+        rankingTbody: document.querySelector("#ranking-tbody"),
+        closeRankingBtn: document.querySelector("#close-ranking-btn"),
+        clearRankingBtn: document.querySelector("#clear-ranking-btn"),
       },
       values: {
         gameVelocity: 1000,
@@ -56,6 +61,15 @@ class DetonaRalphGame {
     );
     GameState.view.playAgainBtn.addEventListener("click", () =>
       this.restartGame()
+    );
+    GameState.view.viewRankingBtn.addEventListener("click", () =>
+      this.showRanking()
+    );
+    GameState.view.closeRankingBtn.addEventListener("click", () =>
+      this.hideRanking()
+    );
+    GameState.view.clearRankingBtn.addEventListener("click", () =>
+      this.clearRanking()
     );
 
     // Eventos de teclado para acessibilidade
@@ -209,6 +223,9 @@ class DetonaRalphGame {
     GameState.values.isGameRunning = false;
     this.stopTimers();
 
+    // Salva a pontuação no ranking
+    this.saveScore(GameState.values.score);
+
     // Atualiza modal
     GameState.view.finalScoreValue.textContent = GameState.values.score;
     GameState.view.gameOverModal.classList.add("show");
@@ -247,6 +264,87 @@ class DetonaRalphGame {
   hideModal() {
     GameState.view.gameOverModal.classList.remove("show");
     GameState.view.gameOverModal.setAttribute("aria-hidden", "true");
+  }
+
+  // Sistema de Ranking
+  saveScore(score) {
+    const playerName = prompt("Digite seu nome para o ranking:", "Jogador");
+    if (!playerName || playerName.trim() === "") return;
+
+    const rankingData = {
+      name: playerName.trim(),
+      score: score,
+      date: new Date().toLocaleDateString("pt-BR"),
+      timestamp: Date.now()
+    };
+
+    let rankings = this.getRankings();
+    rankings.push(rankingData);
+    
+    // Ordena por pontuação (maior primeiro) e mantém apenas os 10 melhores
+    rankings.sort((a, b) => b.score - a.score);
+    rankings = rankings.slice(0, 10);
+    
+    localStorage.setItem("detonaRalphRanking", JSON.stringify(rankings));
+  }
+
+  getRankings() {
+    const stored = localStorage.getItem("detonaRalphRanking");
+    return stored ? JSON.parse(stored) : [];
+  }
+
+  showRanking() {
+    this.hideModal();
+    this.renderRanking();
+    GameState.view.rankingModal.classList.add("show");
+    GameState.view.rankingModal.setAttribute("aria-hidden", "false");
+  }
+
+  hideRanking() {
+    GameState.view.rankingModal.classList.remove("show");
+    GameState.view.rankingModal.setAttribute("aria-hidden", "true");
+  }
+
+  renderRanking() {
+    const rankings = this.getRankings();
+    const tbody = GameState.view.rankingTbody;
+    
+    if (rankings.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" class="no-ranking">
+            Nenhuma pontuação salva ainda!<br>
+            Jogue para aparecer no ranking! 🎮
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = rankings.map((ranking, index) => `
+      <tr>
+        <td class="position">${this.getPositionIcon(index + 1)} ${index + 1}º</td>
+        <td>${ranking.name}</td>
+        <td class="score">${ranking.score}</td>
+        <td class="date">${ranking.date}</td>
+      </tr>
+    `).join("");
+  }
+
+  getPositionIcon(position) {
+    switch (position) {
+      case 1: return "🥇";
+      case 2: return "🥈";
+      case 3: return "🥉";
+      default: return "🏅";
+    }
+  }
+
+  clearRanking() {
+    if (confirm("Tem certeza que deseja limpar todo o ranking? Esta ação não pode ser desfeita.")) {
+      localStorage.removeItem("detonaRalphRanking");
+      this.renderRanking();
+    }
   }
 }
 
