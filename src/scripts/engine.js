@@ -275,16 +275,16 @@ class DetonaRalphGame {
       name: playerName.trim(),
       score: score,
       date: new Date().toLocaleDateString("pt-BR"),
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     let rankings = this.getRankings();
     rankings.push(rankingData);
-    
+
     // Ordena por pontuação (maior primeiro) e mantém apenas os 10 melhores
     rankings.sort((a, b) => b.score - a.score);
     rankings = rankings.slice(0, 10);
-    
+
     localStorage.setItem("detonaRalphRanking", JSON.stringify(rankings));
   }
 
@@ -308,7 +308,7 @@ class DetonaRalphGame {
   renderRanking() {
     const rankings = this.getRankings();
     const tbody = GameState.view.rankingTbody;
-    
+
     if (rankings.length === 0) {
       tbody.innerHTML = `
         <tr>
@@ -321,27 +321,41 @@ class DetonaRalphGame {
       return;
     }
 
-    tbody.innerHTML = rankings.map((ranking, index) => `
+    tbody.innerHTML = rankings
+      .map(
+        (ranking, index) => `
       <tr>
-        <td class="position">${this.getPositionIcon(index + 1)} ${index + 1}º</td>
+        <td class="position">${this.getPositionIcon(index + 1)} ${
+          index + 1
+        }º</td>
         <td>${ranking.name}</td>
         <td class="score">${ranking.score}</td>
         <td class="date">${ranking.date}</td>
       </tr>
-    `).join("");
+    `
+      )
+      .join("");
   }
 
   getPositionIcon(position) {
     switch (position) {
-      case 1: return "🥇";
-      case 2: return "🥈";
-      case 3: return "🥉";
-      default: return "🏅";
+      case 1:
+        return "🥇";
+      case 2:
+        return "🥈";
+      case 3:
+        return "🥉";
+      default:
+        return "🏅";
     }
   }
 
   clearRanking() {
-    if (confirm("Tem certeza que deseja limpar todo o ranking? Esta ação não pode ser desfeita.")) {
+    if (
+      confirm(
+        "Tem certeza que deseja limpar todo o ranking? Esta ação não pode ser desfeita."
+      )
+    ) {
       localStorage.removeItem("detonaRalphRanking");
       this.renderRanking();
     }

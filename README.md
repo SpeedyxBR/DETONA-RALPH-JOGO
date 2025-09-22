@@ -15,7 +15,7 @@ Um jogo divertido e viciante onde você precisa clicar no Ralph antes que ele de
 
 - **Mouse**: Clique nos quadrados
 - **Teclado**: Use as teclas 1-9 para clicar nos quadrados correspondentes
-- **Botões**: 
+- **Botões**:
   - "Iniciar Jogo" - Começa uma nova partida
   - "Reiniciar" - Reseta o jogo
   - "Jogar Novamente" - Aparece no final do jogo
@@ -83,6 +83,7 @@ DETONA-RALPH-JOGO/
 ## 📝 Changelog
 
 ### v2.0.0 - Melhorias Significativas
+
 - ✨ Refatoração completa do código JavaScript
 - 🎨 Design responsivo e moderno
 - ♿ Melhorias de acessibilidade
@@ -92,6 +93,7 @@ DETONA-RALPH-JOGO/
 - 🏆 Dificuldade progressiva
 
 ### v1.0.0 - Versão Inicial
+
 - 🎮 Jogo básico funcional
 - 🎯 Sistema de pontuação simples
 - ⏰ Timer de 60 segundos
@@ -99,6 +101,7 @@ DETONA-RALPH-JOGO/
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas! Sinta-se à vontade para:
+
 - Reportar bugs
 - Sugerir novas funcionalidades
 - Enviar pull requests
