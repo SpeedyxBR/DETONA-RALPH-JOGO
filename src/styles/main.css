@@ -1,296 +1,313 @@
 /* Variáveis CSS */
 :root {
-    --primary-color: #1aeaa5;
-    --secondary-color: #ffd700;
-    --danger-color: #ff4444;
-    --dark-color: #000000;
-    --light-color: #ffffff;
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    --border-radius: 8px;
-    --transition: all 0.3s ease;
+  --primary-color: #1aeaa5;
+  --secondary-color: #ffd700;
+  --danger-color: #ff4444;
+  --dark-color: #000000;
+  --light-color: #ffffff;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
 }
 
 /* Container principal */
-.container {    
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-image: url("../imagens/wall.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url("../imagens/wall.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* Header do jogo */
-.menu {  
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
-    min-height: 90px;
-    width: 100%;
-    background: linear-gradient(135deg, var(--dark-color) 0%, #333 100%);
-    color: var(--light-color);
-    border-bottom: 5px solid var(--secondary-color);
-    box-shadow: var(--shadow);
+.menu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 90px;
+  width: 100%;
+  background: linear-gradient(135deg, var(--dark-color) 0%, #333 100%);
+  color: var(--light-color);
+  border-bottom: 5px solid var(--secondary-color);
+  box-shadow: var(--shadow);
 }
 
-.menu-time, .menu-score, .menu-lives {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    min-width: 120px;
+.menu-time,
+.menu-score,
+.menu-lives {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 120px;
 }
 
 .menu-time h2:first-child,
 .menu-score h2:first-child {
-    color: var(--danger-color);
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
+  color: var(--danger-color);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .menu-time h2:nth-child(2),
 .menu-score h2:nth-child(2),
 .menu-lives h2 {
-    font-size: 1.2rem;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .menu-lives {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .menu-lives img {
-    border-radius: 50%;
-    border: 2px solid var(--secondary-color);
-    transition: var(--transition);
+  border-radius: 50%;
+  border: 2px solid var(--secondary-color);
+  transition: var(--transition);
 }
 
 .menu-lives img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Área de jogo */
 .game-area {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
 .panel {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
 }
 
 .panel-row {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 /* Quadrados do jogo */
 .square {
-    height: 120px;
-    width: 120px;
-    border: 3px solid var(--dark-color);
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
+  height: 120px;
+  width: 120px;
+  border: 3px solid var(--dark-color);
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
 .square:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .square:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 .square.enemy {
-    background-image: url("../imagens/ralph.png");
-    background-size: cover;
-    background-position: center;
-    animation: enemyPulse 0.5s ease-in-out;
+  background-image: url("./src/imagens/ralph.png");
+  background-size: cover;
+  background-position: center;
+  animation: enemyPulse 0.5s ease-in-out;
 }
 
 .square.enemy:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px var(--danger-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px var(--danger-color);
 }
 
 /* Animações */
 @keyframes enemyPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes hitEffect {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); background-color: var(--secondary-color); }
-    100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    background-color: var(--secondary-color);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .square.hit {
-    animation: hitEffect 0.3s ease-in-out;
+  animation: hitEffect 0.3s ease-in-out;
 }
 
 /* Controles */
 .controls {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-family: "Press Start 2P", system-ui;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: var(--transition);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: "Press Start 2P", system-ui;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), #0d8a5f);
-    color: var(--dark-color);
-    box-shadow: var(--shadow);
+  background: linear-gradient(135deg, var(--primary-color), #0d8a5f);
+  color: var(--dark-color);
+  box-shadow: var(--shadow);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #666, #333);
-    color: var(--light-color);
-    box-shadow: var(--shadow);
+  background: linear-gradient(135deg, #666, #333);
+  color: var(--light-color);
+  box-shadow: var(--shadow);
 }
 
 .btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Modal */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
 }
 
 .modal.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal-content {
-    background: var(--light-color);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transform: scale(0.8);
-    transition: var(--transition);
+  background: var(--light-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transform: scale(0.8);
+  transition: var(--transition);
 }
 
 .modal.show .modal-content {
-    transform: scale(1);
+  transform: scale(1);
 }
 
 .modal-content h2 {
-    color: var(--danger-color);
-    margin-bottom: 1rem;
+  color: var(--danger-color);
+  margin-bottom: 1rem;
 }
 
 .modal-content p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .menu {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding: 0.5rem;
-    }
-    
-    .menu-time, .menu-score, .menu-lives {
-        min-width: auto;
-    }
-    
-    .square {
-        height: 80px;
-        width: 80px;
-    }
-    
-    .panel {
-        padding: 10px;
-    }
-    
-    .panel-row {
-        gap: 5px;
-    }
-    
-    .btn {
-        padding: 8px 16px;
-        font-size: 0.6rem;
-    }
-    
-    .modal-content {
-        margin: 1rem;
-        padding: 1rem;
-    }
+  .menu {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .menu-time,
+  .menu-score,
+  .menu-lives {
+    min-width: auto;
+  }
+
+  .square {
+    height: 80px;
+    width: 80px;
+  }
+
+  .panel {
+    padding: 10px;
+  }
+
+  .panel-row {
+    gap: 5px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.6rem;
+  }
+
+  .modal-content {
+    margin: 1rem;
+    padding: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .square {
-        height: 60px;
-        width: 60px;
-    }
-    
-    .menu-time h2:first-child,
-    .menu-score h2:first-child {
-        font-size: 0.6rem;
-    }
-    
-    .menu-time h2:nth-child(2),
-    .menu-score h2:nth-child(2),
-    .menu-lives h2 {
-        font-size: 1rem;
-    }
+  .square {
+    height: 60px;
+    width: 60px;
+  }
+
+  .menu-time h2:first-child,
+  .menu-score h2:first-child {
+    font-size: 0.6rem;
+  }
+
+  .menu-time h2:nth-child(2),
+  .menu-score h2:nth-child(2),
+  .menu-lives h2 {
+    font-size: 1rem;
+  }
 }
