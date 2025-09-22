@@ -36,6 +36,10 @@ class DetonaRalphGame {
         countDownTimerId: null,
       },
     };
+    
+    // Debug: verificar se os elementos foram encontrados
+    console.log("Quadrados encontrados:", GameState.view.squares.length);
+    console.log("Botão iniciar:", GameState.view.startBtn);
   }
 
   initializeGame() {
@@ -63,12 +67,14 @@ class DetonaRalphGame {
   }
 
   startGame() {
+    console.log("startGame chamada!");
     if (GameState.values.isGameRunning) return;
 
     GameState.values.isGameRunning = true;
     GameState.view.startBtn.disabled = true;
     GameState.view.startBtn.textContent = "Jogando...";
 
+    console.log("Iniciando timers...");
     this.startTimers();
   }
 
@@ -104,6 +110,8 @@ class DetonaRalphGame {
   }
 
   randomSquare() {
+    console.log("randomSquare chamada!");
+    
     // Remove classe enemy de todos os quadrados
     GameState.view.squares.forEach((square) => {
       square.classList.remove("enemy");
@@ -112,8 +120,11 @@ class DetonaRalphGame {
     // Seleciona quadrado aleatório
     const randomNumber = Math.floor(Math.random() * 9);
     const randomSquare = GameState.view.squares[randomNumber];
+    console.log("Quadrado selecionado:", randomNumber, randomSquare);
+    
     randomSquare.classList.add("enemy");
     GameState.values.hitPosition = randomSquare.id;
+    console.log("Hit position definida:", GameState.values.hitPosition);
 
     // Aumenta dificuldade progressivamente
     this.increaseDifficulty();
